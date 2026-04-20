@@ -1,0 +1,13 @@
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\lv_mem_core_rtthread.c
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\../lv_mem.h
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\../../lv_conf_internal.h
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\../../lv_conf_kconfig.h
+h7_standard_project\lv_mem_core_rtthread.o: ../Middlewares/LVGL/lv_conf.h
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\../lv_string.h
+h7_standard_project\lv_mem_core_rtthread.o: ..\Middlewares\LVGL\src\stdlib\rtthread\../../misc/lv_types.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\lv_mem_core_rtthread.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h

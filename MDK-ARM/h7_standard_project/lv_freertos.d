@@ -1,0 +1,14 @@
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\lv_freertos.c
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\lv_os_private.h
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\../lv_conf_internal.h
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\../lv_conf_kconfig.h
+h7_standard_project\lv_freertos.o: ../Middlewares/LVGL/lv_conf.h
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\lv_os.h
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\../misc/lv_types.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\lv_freertos.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\lv_freertos.o: ..\Middlewares\LVGL\src\osal\lv_os_none.h

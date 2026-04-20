@@ -1,0 +1,17 @@
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\decomp_raw.c
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../../../lv_conf_internal.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../../../lv_conf_kconfig.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\lv_conf.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../../../stdlib/lv_string.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../../../stdlib/../misc/lv_types.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\decomp_raw.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../../../misc/lv_fs.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\frogfs_priv.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../include/frogfs/frogfs_types.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\../include/frogfs/frogfs.h
+h7_standard_project\decomp_raw.o: ..\Middlewares\LVGL\src\libs\frogfs\src\frogfs_format.h

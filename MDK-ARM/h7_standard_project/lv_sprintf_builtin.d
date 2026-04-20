@@ -1,0 +1,13 @@
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\lv_sprintf_builtin.c
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\../../lv_conf_internal.h
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\../../lv_conf_kconfig.h
+h7_standard_project\lv_sprintf_builtin.o: ../Middlewares/LVGL/lv_conf.h
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\../lv_sprintf.h
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\../../misc/lv_types.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\lv_sprintf_builtin.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\lv_sprintf_builtin.o: ..\Middlewares\LVGL\src\stdlib\builtin\../lv_string.h

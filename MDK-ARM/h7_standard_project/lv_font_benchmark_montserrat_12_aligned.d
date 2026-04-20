@@ -1,0 +1,1 @@
+h7_standard_project\lv_font_benchmark_montserrat_12_aligned.o: ..\Middlewares\LVGL\demos\benchmark\assets\lv_font_benchmark_montserrat_12_aligned.c
