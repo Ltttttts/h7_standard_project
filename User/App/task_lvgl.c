@@ -22,6 +22,8 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 #include "task_game.h"
+#include "task_key.h"
+
 
 static const char* TAG = "LVGL_Task";
 
@@ -499,12 +501,53 @@ void UI_MainMenu_Create(void) {
 /* =======================================================
  * 7. 主循环与输入分发
  * ======================================================= */
+
+
+/* =======================================================
+ * 新增：独立的按键事件路由中心
+ * 说明：注意，调用此函数前，必须已经获取了 lvgl_mutex！
+ * ======================================================= */
+static void UI_Handle_Key_Message(uint8_t key_id, Key_Event_e event) 
+{
+    // 1. 全局检测 Key 4 (退出/返回)
+    if (is_in_monitor && key_id == 4 && event == KEY_EVENT_CLICK) {
+        if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) {
+            lv_obj_add_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_remove_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);
+        } 
+        else if (game_task_handle != NULL) {
+            Game_Stop(); 
+            osDelay(50); 
+            lv_obj_remove_flag(main_menu_cont, LV_OBJ_FLAG_HIDDEN);
+            is_in_monitor = false;
+            lv_group_focus_obj(btn_monitor); 
+        } 
+        else {
+            close_subpage_action(); 
+        }
+    }
+    
+    // 2. 如果在数据页，自己接管上下滚动 (离散点击触发)
+    if (is_in_data_view_mode()) {
+        lv_obj_t * active_scroll_obj = NULL;
+        if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = task_table;
+        else if (imu_view_cont && !lv_obj_has_flag(imu_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = imu_view_cont;
+        else if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = file_view_cont;
+
+        if (active_scroll_obj != NULL) {
+            if (key_id == 1 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, 40, LV_ANIM_ON);
+            if (key_id == 2 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, -40, LV_ANIM_ON);
+        }
+    }
+}
+
 void Task_LVGL_Entry(void *argument) 
 {
     Screen.Init(&Screen); 
     Screen.Clear(&Screen); 
     Screen.SetBacklight(&Screen, 1);
-    for(int i = 0; i < KEY_NUM; i++) Key_Init(&Keys[i], i + 1, Drv_Key_Read, 1000);
+    
+    // 【删除】旧的 Key_Init，因为已经移交给了 task_key.c
 
     lv_init();
     lv_display_t * disp = lv_display_create(MY_DISP_HOR_RES, MY_DISP_VER_RES);
@@ -523,63 +566,23 @@ void Task_LVGL_Entry(void *argument)
     
     UI_MainMenu_Create();
     
-    // 1. 创建 LVGL 全局互斥锁
+    // 创建 LVGL 全局互斥锁
     lvgl_mutex = osMutexNew(NULL);
 
-    while (1) {
-        // 第一阶段：读取硬件状态 (无锁操作，避免阻塞)
-        for(int i = 0; i < KEY_NUM; i++) {
-            Key_Update(&Keys[i], 5); 
-        }
-
+    while(1) {
+        
         // ==========================================
-        // 2. 锁定 LVGL 引擎！保护 UI 不被其他任务破坏
         osMutexAcquire(lvgl_mutex, osWaitForever);
         // ==========================================
 
-        for(int i = 0; i < KEY_NUM; i++) {
-            Key_Event_e event = Key_GetEvent(&Keys[i]);
-            
-            if (event != KEY_EVENT_NONE) {
-                // 1. 全局检测 Key 4 (退出/返回)
-                if (is_in_monitor && Keys[i].id == 4 && event == KEY_EVENT_CLICK) {
-                    if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) {
-                        lv_obj_add_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN);
-                        lv_obj_remove_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);
-                    } 
-                    else if (game_task_handle != NULL) {
-                        // 【核心修改】：通知游戏任务停止运行
-                        Game_Stop(); 
-                        
-                        // 让出一点时间让游戏任务能拿到 CPU 去清理资源
-                        osDelay(50); 
-                        
-                        lv_obj_remove_flag(main_menu_cont, LV_OBJ_FLAG_HIDDEN);
-                        is_in_monitor = false;
-                        lv_group_focus_obj(btn_monitor); 
-                    } 
-                    else {
-                        close_subpage_action(); 
-                    }
-                }
-                
-                // 2. 如果在数据页，自己接管上下滚动
-                if (is_in_data_view_mode()) {
-                    lv_obj_t * active_scroll_obj = NULL;
-                    if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = task_table;
-                    else if (imu_view_cont && !lv_obj_has_flag(imu_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = imu_view_cont;
-                    else if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = file_view_cont;
-
-                    if (active_scroll_obj != NULL) {
-                        if (Keys[i].id == 1 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, 40, LV_ANIM_ON);
-                        if (Keys[i].id == 2 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, -40, LV_ANIM_ON);
-                    }
-                }
-                // 注意：这里没有再写关于 sd_menu_cont 的判断了，因为它的上下键和回车已经被 LVGL 的 indev 接管了！
-            }
+        // 1. 处理所有排队的按键消息
+        KeyEventMsg_t key_msg;
+        while (key_msg_queue != NULL && osMessageQueueGet(key_msg_queue, &key_msg, NULL, 0) == osOK) {
+            // 【核心变化】：把解析出来的 ID 和 Event 传给刚才写的独立函数
+            UI_Handle_Key_Message(key_msg.id, key_msg.event);
         }
         
-        // 3. 数据模式下的长按平滑滚动处理
+        // 2. 处理长按平滑滚动 (需要直接读 GPIO)
         if (is_in_data_view_mode()) {
             lv_obj_t * active_scroll_obj = NULL;
             if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = task_table;
@@ -596,15 +599,15 @@ void Task_LVGL_Entry(void *argument)
             }
         }
 
-        // 4. LVGL 心跳处理 (必须在锁内)
+        // 3. LVGL 心跳
         lv_timer_handler(); 
 
         // ==========================================
-        // 5. 释放 LVGL 引擎锁！允许游戏任务去更新坐标
         osMutexRelease(lvgl_mutex);
         // ==========================================
 
         osDelay(5); 
         lv_tick_inc(5);
     }
+    
 }

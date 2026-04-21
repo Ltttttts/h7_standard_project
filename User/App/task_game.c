@@ -38,7 +38,7 @@ void Game_Entry(void *argument) {
     // 如果锁还没建好，直接退出防死机
     if (lvgl_mutex == NULL) {
         game_task_handle = NULL;
-        vTaskDelete(NULL);
+        osThreadExit();
         return;
     }
 
@@ -91,7 +91,7 @@ void Game_Entry(void *argument) {
     
     // 5. 安全自杀
     game_task_handle = NULL;
-    vTaskDelete(NULL); 
+    osThreadExit();
 }
 
 /**

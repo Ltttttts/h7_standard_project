@@ -42,6 +42,9 @@ h7_standard_project\logger.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_
 h7_standard_project\logger.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 h7_standard_project\logger.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7_standard_project\logger.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdio.h
+h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\string.h
 h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 h7_standard_project\logger.o: ../Core/Inc/FreeRTOSConfig.h
 h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
@@ -53,6 +56,3 @@ h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include
 h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 h7_standard_project\logger.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
-h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdio.h
-h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
-h7_standard_project\logger.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\string.h

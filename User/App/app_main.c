@@ -95,12 +95,12 @@ void StartTask_Entry(void *argument) {
     }	
 	
 	
-//	keyTaskHandle = osThreadNew(Task_Key_Entry, NULL, &keyTask_attr);
-//    if (keyTaskHandle == NULL) {
-//        LOG_E("SYS", "Failed to create key Task!");
-//    } else {
-//        LOG_I("SYS", "key Task created successfully.");
-//    }	
+	keyTaskHandle = osThreadNew(Task_Key_Entry, NULL, &keyTask_attr);
+    if (keyTaskHandle == NULL) {
+        LOG_E("SYS", "Failed to create key Task!");
+    } else {
+        LOG_I("SYS", "key Task created successfully.");
+    }	
 	
 	
 	imuTaskHandle = osThreadNew(Task_IMU_Entry, NULL, &imuTask_attr);
@@ -118,7 +118,7 @@ void StartTask_Entry(void *argument) {
 
     // 6. π¶≥……ÌÕÀ
     LOG_I("SYS", "System initialization complete. StartTask self-deleting.");
-    vTaskDelete(NULL); 
+    osThreadExit(); 
 }
 
 

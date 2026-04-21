@@ -281,3 +281,4 @@ h7_standard_project\task_lvgl.o: ../Middlewares/Third_Party/FatFs/src/ff_gen_drv
 h7_standard_project\task_lvgl.o: ../Middlewares/Third_Party/FatFs/src/diskio.h
 h7_standard_project\task_lvgl.o: ../FATFS/Target/sd_diskio.h
 h7_standard_project\task_lvgl.o: ..\User\App\task_game.h
+h7_standard_project\task_lvgl.o: ..\User\App\task_key.h

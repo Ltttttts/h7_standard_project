@@ -67,4 +67,5 @@ h7_standard_project\app_main.o: ..\User\App\task_led.h
 h7_standard_project\app_main.o: ..\User\App\task_lcd.h
 h7_standard_project\app_main.o: ..\User\App\task_lvgl.h
 h7_standard_project\app_main.o: ..\User\App\task_key.h
+h7_standard_project\app_main.o: ../User/Components/key_dev.h
 h7_standard_project\app_main.o: ..\User\App\task_imu.h
