@@ -7,12 +7,12 @@ h7_standard_project\task_game.o: ../Middlewares/LVGL/src/lv_conf_internal.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/lv_conf_kconfig.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/lv_conf.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/misc/lv_types.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdbool.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\inttypes.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\limits.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/stdlib/lv_mem.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/stdlib/lv_string.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/stdlib/lv_sprintf.h
@@ -237,7 +237,7 @@ h7_standard_project\task_game.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 h7_standard_project\task_game.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-h7_standard_project\task_game.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\math.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h

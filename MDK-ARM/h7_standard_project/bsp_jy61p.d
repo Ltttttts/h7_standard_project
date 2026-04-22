@@ -1,13 +1,13 @@
 h7_standard_project\bsp_jy61p.o: ..\User\BSP\bsp_jy61p.c
 h7_standard_project\bsp_jy61p.o: ..\User\BSP\bsp_jy61p.h
-h7_standard_project\bsp_jy61p.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\bsp_jy61p.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/wit_c_sdk/wit_c_sdk.h
-h7_standard_project\bsp_jy61p.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdio.h
-h7_standard_project\bsp_jy61p.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\string.h
+h7_standard_project\bsp_jy61p.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+h7_standard_project\bsp_jy61p.o: F:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/wit_c_sdk/REG.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-h7_standard_project\bsp_jy61p.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\bsp_jy61p.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
 h7_standard_project\bsp_jy61p.o: ../Core/Inc/FreeRTOSConfig.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 h7_standard_project\bsp_jy61p.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

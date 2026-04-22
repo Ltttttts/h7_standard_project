@@ -4,9 +4,9 @@ h7_standard_project\lv_font_manager_recycle.o: ..\Middlewares\LVGL\src\font\font
 h7_standard_project\lv_font_manager_recycle.o: ..\Middlewares\LVGL\src\font\font_manager\../../misc/../lv_conf_internal.h
 h7_standard_project\lv_font_manager_recycle.o: ..\Middlewares\LVGL\src\font\font_manager\../../misc/../lv_conf_kconfig.h
 h7_standard_project\lv_font_manager_recycle.o: ../Middlewares/LVGL/lv_conf.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdbool.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\inttypes.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\limits.h
-h7_standard_project\lv_font_manager_recycle.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
+h7_standard_project\lv_font_manager_recycle.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h

@@ -11,12 +11,16 @@
 #include "task_lvgl.h"
 #include "task_key.h"
 #include "task_imu.h"
+#include "task_uart.h"
+
 
 osThreadId_t ledTaskHandle;
 osThreadId_t lcdTaskHandle;
 osThreadId_t lvglTaskHandle;
 osThreadId_t keyTaskHandle;
 osThreadId_t imuTaskHandle;
+osThreadId_t uartTaskHandle;
+
 
 
 // 将 LED 任务的配置提取出来，方便管理
@@ -46,6 +50,11 @@ const osThreadAttr_t keyTask_attr = {
         .priority = (osPriority_t) osPriorityNormal,
 };
 
+const osThreadAttr_t uartTask_attr = {
+        .name = "UART_Task",
+        .stack_size = 256 * 4, 
+        .priority = (osPriority_t) osPriorityNormal,
+};
 
 const osThreadAttr_t imuTask_attr = {
         .name = "IMU_Task",
@@ -67,8 +76,7 @@ void StartTask_Entry(void *argument) {
     // 3. 初始化硬件驱动 (BSP)
     BSP_LED_Init();
 	BSP_LCD_Construct();
-	uint8_t res = BSP_SD_Init();
-	LOG_I("SYS","%d",res);
+	BSP_SD_Init();
 	
 
     // 4. 创建业务任务
@@ -100,6 +108,13 @@ void StartTask_Entry(void *argument) {
         LOG_E("SYS", "Failed to create key Task!");
     } else {
         LOG_I("SYS", "key Task created successfully.");
+    }	
+
+    uartTaskHandle = osThreadNew(Task_UART_Entry, NULL, &uartTask_attr);
+    if (uartTaskHandle == NULL) {
+        LOG_E("SYS", "Failed to create UART Task!");
+    } else {
+        LOG_I("SYS", "UART Task created successfully.");
     }	
 	
 	

@@ -1,8 +1,8 @@
 h7_standard_project\app_main.o: ..\User\App\app_main.c
 h7_standard_project\app_main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 h7_standard_project\app_main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-h7_standard_project\app_main.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
-h7_standard_project\app_main.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\app_main.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\app_main.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 h7_standard_project\app_main.o: ../Core/Inc/FreeRTOSConfig.h
 h7_standard_project\app_main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 h7_standard_project\app_main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -27,7 +27,7 @@ h7_standard_project\app_main.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 h7_standard_project\app_main.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-h7_standard_project\app_main.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\math.h
+h7_standard_project\app_main.o: F:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h
@@ -69,3 +69,4 @@ h7_standard_project\app_main.o: ..\User\App\task_lvgl.h
 h7_standard_project\app_main.o: ..\User\App\task_key.h
 h7_standard_project\app_main.o: ../User/Components/key_dev.h
 h7_standard_project\app_main.o: ..\User\App\task_imu.h
+h7_standard_project\app_main.o: ..\User\App\task_uart.h

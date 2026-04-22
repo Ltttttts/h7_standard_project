@@ -12,7 +12,7 @@ h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Include/core_cm7.h
-h7_standard_project\sd_diskio.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdint.h
+h7_standard_project\sd_diskio.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Include/cmsis_version.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -20,8 +20,8 @@ h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 h7_standard_project\sd_diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-h7_standard_project\sd_diskio.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stddef.h
-h7_standard_project\sd_diskio.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\math.h
+h7_standard_project\sd_diskio.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7_standard_project\sd_diskio.o: F:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 h7_standard_project\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h
@@ -61,5 +61,5 @@ h7_standard_project\sd_diskio.o: ../Middlewares/Third_Party/FreeRTOS/Source/incl
 h7_standard_project\sd_diskio.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 h7_standard_project\sd_diskio.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 h7_standard_project\sd_diskio.o: ../FATFS/Target/sd_diskio.h
-h7_standard_project\sd_diskio.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\string.h
-h7_standard_project\sd_diskio.o: C:\my\keil5_mdk\Core\ARM\ARMCC\Bin\..\include\stdio.h
+h7_standard_project\sd_diskio.o: F:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+h7_standard_project\sd_diskio.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h

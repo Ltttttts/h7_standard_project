@@ -23,13 +23,11 @@
 #include "sd_diskio.h"
 #include "task_game.h"
 #include "task_key.h"
-
+#include "input_manager.h"
 
 static const char* TAG = "LVGL_Task";
 
-
 osMutexId_t lvgl_mutex = NULL;
-
 
 #define MY_DISP_HOR_RES    240
 #define MY_DISP_VER_RES    240
@@ -43,8 +41,6 @@ Key_t Keys[KEY_NUM];
 extern JY61P_t MyIMU; 
 extern FATFS SDFatFs; 
 extern osThreadId_t game_task_handle;
-
-
 
 static bool is_in_monitor = false; // 子页面状态标志
 
@@ -60,8 +56,10 @@ static lv_obj_t * file_view_cont = NULL;
 static lv_obj_t * task_table  = NULL;     
 static lv_obj_t * btn_monitor = NULL; 
 
+static lv_group_t * g = NULL;
+
 /* =======================================================
- * 1. 底层显示与智能输入驱动 (★核心修改区域★)
+ * 1. 底层显示驱动
  * ======================================================= */
 static void my_disp_flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_t * px_map)
 {
@@ -71,34 +69,14 @@ static void my_disp_flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_
     lv_display_flush_ready(disp);
 }
 
-lv_indev_t * indev_keypad;
-static uint32_t last_key = 0; 
-
-// 新增辅助函数：判断当前是否在"数据阅读模式" (需要手动像素滚动的页面)
+// 辅助函数：判断当前是否在"数据阅读模式" (需要手动像素滚动的页面)
 static bool is_in_data_view_mode(void) {
     if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) return true;
     if (imu_view_cont && !lv_obj_has_flag(imu_view_cont, LV_OBJ_FLAG_HIDDEN)) return true;
     if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) return true;
-    if (game_task_handle != NULL) return true; // 【新增】游戏运行时，也要接管按键
+    if (game_task_handle != NULL) return true; // 游戏运行时，也要接管按键
     return false;
 }
-
-static void keypad_read_cb(lv_indev_t * indev, lv_indev_data_t * data) {
-    // 【智能分流】：如果在数据展示页，切断 LVGL 默认按键，由我们自己在主循环接管平滑滚动
-    if (is_in_data_view_mode()) {
-        data->state = LV_INDEV_STATE_RELEASED;
-        return;
-    }
-    
-    // 否则 (在主菜单或SD卡文件列表时)，把控制权交还给 LVGL，让它自动处理焦点和回车点击！
-    if(Drv_Key_Read(1))      { last_key = LV_KEY_PREV;  data->state = LV_INDEV_STATE_PRESSED; }
-    else if(Drv_Key_Read(2)) { last_key = LV_KEY_NEXT;  data->state = LV_INDEV_STATE_PRESSED; }
-    else if(Drv_Key_Read(3)) { last_key = LV_KEY_ENTER; data->state = LV_INDEV_STATE_PRESSED; }
-    else if(Drv_Key_Read(4)) { last_key = LV_KEY_ESC;   data->state = LV_INDEV_STATE_PRESSED; }
-    else                     { data->state = LV_INDEV_STATE_RELEASED; }
-    data->key = last_key; 
-}
-
 
 /* =======================================================
  * 3. 任务监控页面 (OS Task Monitor)
@@ -215,9 +193,6 @@ static char sd_read_buf[64]  __attribute__((aligned(32)));
 static lv_obj_t * file_content_label = NULL; 
 static char current_filepath[64]; 
 
-/**
- * @brief SD 卡功能自检函数
- */
 static int SD_General_Test(void) {
     FRESULT res;
     FIL test_file;
@@ -254,9 +229,6 @@ static int SD_General_Test(void) {
     return 0; 
 }
 
-/* =======================================================
- * 文件阅读器逻辑
- * ======================================================= */
 static void UI_FileViewer_Init(void) {
     if (file_view_cont != NULL) return;
 
@@ -282,15 +254,12 @@ static void file_click_event_cb(lv_event_t * e) {
     if(!label) return; 
 
     const char * full_text = lv_label_get_text(label);
-
-    // 【核心修复】：安全提取带有空格的文件名
     char pure_filename[64] = {0};
     strncpy(pure_filename, full_text, sizeof(pure_filename) - 1);
 
-    // 寻找我们之前拼接大小信息时加的标记 "  ("
     char * tail = strstr(pure_filename, "  (");
     if (tail != NULL) {
-        *tail = '\0'; // 截断尾巴，保留完整的文件名（比如 "FatFs Test.txt"）
+        *tail = '\0'; 
     }
 
     snprintf(current_filepath, sizeof(current_filepath), "0:/%s", pure_filename);
@@ -299,7 +268,6 @@ static void file_click_event_cb(lv_event_t * e) {
     UI_FileViewer_Init();
 
     FIL file;
-    // 尝试打开文件
     FRESULT res = f_open(&file, current_filepath, FA_READ);
     if (res == FR_OK) {
         static char read_buffer[2048] __attribute__((aligned(32))); 
@@ -309,35 +277,25 @@ static void file_click_event_cb(lv_event_t * e) {
         read_buffer[br] = '\0'; 
         
         f_close(&file);
-
-        // 将读取到的文本显示到屏幕上
         lv_label_set_text(file_content_label, read_buffer);
         
-        // 成功读取后，隐藏列表页，显示阅读页！
         lv_obj_add_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);
         lv_obj_remove_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN);
-        
-        // 顺便把之前可能存在的报错提示隐藏掉
         if (sd_status_lab) lv_obj_add_flag(sd_status_lab, LV_OBJ_FLAG_HIDDEN);
         
     } else {
         LOG_E(TAG, "Failed to open file! Code: %d", res);
-        
-        // 【新增体验优化】：如果打开失败，在屏幕上给个红色提示，而不是默默没反应
         if (sd_status_lab) {
             char err_msg[64];
             snprintf(err_msg, sizeof(err_msg), "Open Failed! Code: %d", res);
             lv_label_set_text(sd_status_lab, err_msg);
             lv_obj_set_style_text_color(sd_status_lab, lv_color_hex(0xFF0000), 0);
             lv_obj_remove_flag(sd_status_lab, LV_OBJ_FLAG_HIDDEN);
-            lv_obj_move_foreground(sd_status_lab); // 确保提示在最上层
+            lv_obj_move_foreground(sd_status_lab); 
         }
     }
 }
 
-/**
- * @brief 扫描根目录并生成带有文件大小的精美列表
- */
 static void SD_Refresh_FileList(void) {
     FRESULT res;
     DIR dir;
@@ -416,9 +374,9 @@ void UI_SDExplorer_Init(lv_obj_t * parent) {
  * ======================================================= */
 static void close_subpage_action(void) {
     is_in_monitor = false; 
-    if (monitor_cont)  lv_obj_add_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN);      
+    if (monitor_cont)  lv_obj_add_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN);       
     if (imu_view_cont) lv_obj_add_flag(imu_view_cont, LV_OBJ_FLAG_HIDDEN);      
-    if (sd_menu_cont)  lv_obj_add_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);      
+    if (sd_menu_cont)  lv_obj_add_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);       
     if (file_view_cont) lv_obj_add_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN);
     lv_obj_remove_flag(main_menu_cont, LV_OBJ_FLAG_HIDDEN); 
     lv_group_focus_obj(btn_monitor); 
@@ -462,20 +420,11 @@ static void open_sd_action(lv_event_t * e) {
     is_in_monitor = true; 
 }
 
-
-
 static void open_game_action(lv_event_t * e) {
-    // 隐藏主菜单，防止干扰
     lv_obj_add_flag(main_menu_cont, LV_OBJ_FLAG_HIDDEN);
-    
-    // 调用启动函数创建独立任务
     Game_Start();
-    
-    // 标记进入了子页面
     is_in_monitor = true; 
 }
-
-
 
 void UI_MainMenu_Create(void) {
     main_menu_cont = lv_list_create(lv_screen_active());
@@ -490,27 +439,57 @@ void UI_MainMenu_Create(void) {
 
     lv_obj_t * btn_sd = lv_list_add_button(main_menu_cont, LV_SYMBOL_DRIVE, "SD Explorer");
     lv_obj_add_event_cb(btn_sd, open_sd_action, LV_EVENT_CLICKED, NULL);
-	
-	lv_obj_t * btn_game = lv_list_add_button(main_menu_cont, LV_SYMBOL_PLAY, "Gravity MiniGame");
-	lv_obj_add_event_cb(btn_game, open_game_action, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t * btn_game = lv_list_add_button(main_menu_cont, LV_SYMBOL_PLAY, "Gravity MiniGame");
+    lv_obj_add_event_cb(btn_game, open_game_action, LV_EVENT_CLICKED, NULL);
 
     lv_list_add_button(main_menu_cont, LV_SYMBOL_WIFI, "System Settings");
 }
 
+// ==========================================
+// 【核心修改】虚拟输入设备状态机缓冲
+// ==========================================
+static uint32_t simulated_key = 0;
+static uint8_t  simulated_state = 0; // 0:松开, 1:按下, 2:等待释放
+lv_indev_t * indev_keypad;           // 恢复输入设备句柄
+
+static void keypad_read_cb(lv_indev_t * indev_drv, lv_indev_data_t * data) {
+    // 1. 优先处理来自【串口队列】的瞬间脉冲（将其拉长为标准的按下-松开动作）
+    if (simulated_state == 1) {
+        data->key = simulated_key;
+        data->state = LV_INDEV_STATE_PRESSED;
+        simulated_state = 2; // 保证按压状态至少维持一个 LVGL 轮询周期
+        return;
+    } else if (simulated_state == 2) {
+        data->key = simulated_key;
+        data->state = LV_INDEV_STATE_RELEASED;
+        simulated_state = 0; // 动作完成
+        return;
+    }
+
+    // 2. 处理【物理按键】 (依然通过优雅的抽象层，与底层引脚彻底隔离)
+    if (Input_Is_Key_Held(SYS_KEY_UP)) {
+        data->key = LV_KEY_PREV;
+        data->state = LV_INDEV_STATE_PRESSED;
+    } else if (Input_Is_Key_Held(SYS_KEY_DOWN)) {
+        data->key = LV_KEY_NEXT;
+        data->state = LV_INDEV_STATE_PRESSED;
+    } else if (Input_Is_Key_Held(SYS_KEY_ENTER)) {
+        data->key = LV_KEY_ENTER;
+        data->state = LV_INDEV_STATE_PRESSED;
+    } else {
+        data->state = LV_INDEV_STATE_RELEASED;
+    }
+}
 
 /* =======================================================
- * 7. 主循环与输入分发
- * ======================================================= */
-
-
-/* =======================================================
- * 新增：独立的按键事件路由中心
+ * 独立的按键事件路由中心
  * 说明：注意，调用此函数前，必须已经获取了 lvgl_mutex！
  * ======================================================= */
-static void UI_Handle_Key_Message(uint8_t key_id, Key_Event_e event) 
+static void UI_Handle_Key_Message(InputEventMsg_t msg) 
 {
-    // 1. 全局检测 Key 4 (退出/返回)
-    if (is_in_monitor && key_id == 4 && event == KEY_EVENT_CLICK) {
+    // 1. 全局检测退出/返回
+    if (is_in_monitor && msg.key_code == SYS_KEY_BACK && msg.event == KEY_EVENT_CLICK) {
         if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) {
             lv_obj_add_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN);
             lv_obj_remove_flag(sd_menu_cont, LV_OBJ_FLAG_HIDDEN);
@@ -527,16 +506,30 @@ static void UI_Handle_Key_Message(uint8_t key_id, Key_Event_e event)
         }
     }
     
-    // 2. 如果在数据页，自己接管上下滚动 (离散点击触发)
-    if (is_in_data_view_mode()) {
+    // 2. 如果在数据页，自己接管上下滚动
+    else if (is_in_data_view_mode()) {
         lv_obj_t * active_scroll_obj = NULL;
         if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = task_table;
         else if (imu_view_cont && !lv_obj_has_flag(imu_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = imu_view_cont;
         else if (file_view_cont && !lv_obj_has_flag(file_view_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = file_view_cont;
 
         if (active_scroll_obj != NULL) {
-            if (key_id == 1 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, 40, LV_ANIM_ON);
-            if (key_id == 2 && event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, -40, LV_ANIM_ON);
+            if (msg.key_code == SYS_KEY_UP && msg.event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, 40, LV_ANIM_ON);
+            if (msg.key_code == SYS_KEY_DOWN && msg.event == KEY_EVENT_CLICK) lv_obj_scroll_by(active_scroll_obj, 0, -40, LV_ANIM_ON);
+        }
+    }
+    
+    // ==========================================================
+    // 3. 【核心新增】：如果在菜单页，且由串口发送，喂给状态机
+    // ==========================================================
+    else if (g != NULL && msg.source == INPUT_SRC_UART && msg.event == KEY_EVENT_CLICK) {
+        if (msg.key_code == SYS_KEY_UP) simulated_key = LV_KEY_PREV;
+        else if (msg.key_code == SYS_KEY_DOWN) simulated_key = LV_KEY_NEXT;
+        else if (msg.key_code == SYS_KEY_ENTER) simulated_key = LV_KEY_ENTER;
+        else simulated_key = 0;
+        
+        if (simulated_key != 0) {
+            simulated_state = 1; // 触发状态机，LVGL 会在下一次心跳完成动作！
         }
     }
 }
@@ -546,8 +539,6 @@ void Task_LVGL_Entry(void *argument)
     Screen.Init(&Screen); 
     Screen.Clear(&Screen); 
     Screen.SetBacklight(&Screen, 1);
-    
-    // 【删除】旧的 Key_Init，因为已经移交给了 task_key.c
 
     lv_init();
     lv_display_t * disp = lv_display_create(MY_DISP_HOR_RES, MY_DISP_VER_RES);
@@ -555,16 +546,16 @@ void Task_LVGL_Entry(void *argument)
     lv_display_set_buffers(disp, draw_buf, NULL, sizeof(draw_buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(disp, my_disp_flush_cb);
     
-    static lv_group_t * g; 
     g = lv_group_create(); 
     lv_group_set_default(g);
     
+    UI_MainMenu_Create();
+    
+    // 【必须恢复】：重新注册设备，LVGL拿回对焦点的控制权
     indev_keypad = lv_indev_create();
     lv_indev_set_type(indev_keypad, LV_INDEV_TYPE_KEYPAD);
     lv_indev_set_read_cb(indev_keypad, keypad_read_cb);
     lv_indev_set_group(indev_keypad, g);
-    
-    UI_MainMenu_Create();
     
     // 创建 LVGL 全局互斥锁
     lvgl_mutex = osMutexNew(NULL);
@@ -576,13 +567,13 @@ void Task_LVGL_Entry(void *argument)
         // ==========================================
 
         // 1. 处理所有排队的按键消息
-        KeyEventMsg_t key_msg;
-        while (key_msg_queue != NULL && osMessageQueueGet(key_msg_queue, &key_msg, NULL, 0) == osOK) {
-            // 【核心变化】：把解析出来的 ID 和 Event 传给刚才写的独立函数
-            UI_Handle_Key_Message(key_msg.id, key_msg.event);
+        InputEventMsg_t input_msg;
+        while (input_msg_queue != NULL && osMessageQueueGet(input_msg_queue, &input_msg, NULL, 0) == osOK) {
+            // 【更改】：把整个 msg 结构体传进去了，包含了 source
+            UI_Handle_Key_Message(input_msg);
         }
         
-        // 2. 处理长按平滑滚动 (需要直接读 GPIO)
+        // 2. 处理长按平滑滚动 (抽象轮询接口)
         if (is_in_data_view_mode()) {
             lv_obj_t * active_scroll_obj = NULL;
             if (monitor_cont && !lv_obj_has_flag(monitor_cont, LV_OBJ_FLAG_HIDDEN)) active_scroll_obj = task_table;
@@ -592,8 +583,14 @@ void Task_LVGL_Entry(void *argument)
             if (active_scroll_obj != NULL) {
                 static uint8_t scroll_tick = 0;
                 if (++scroll_tick >= 10) { 
-                    if (Drv_Key_Read(1) == 1) lv_obj_scroll_by(active_scroll_obj, 0, 15, LV_ANIM_ON);
-                    if (Drv_Key_Read(2) == 1) lv_obj_scroll_by(active_scroll_obj, 0, -15, LV_ANIM_ON);
+                    
+                    if (Input_Is_Key_Held(SYS_KEY_UP)) {
+                        lv_obj_scroll_by(active_scroll_obj, 0, 15, LV_ANIM_ON);
+                    }
+                    if (Input_Is_Key_Held(SYS_KEY_DOWN)) {
+                        lv_obj_scroll_by(active_scroll_obj, 0, -15, LV_ANIM_ON);
+                    }
+                    
                     scroll_tick = 0;
                 }
             }
@@ -609,5 +606,6 @@ void Task_LVGL_Entry(void *argument)
         osDelay(5); 
         lv_tick_inc(5);
     }
-    
 }
+
+

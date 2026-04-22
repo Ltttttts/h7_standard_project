@@ -72,6 +72,7 @@
 "h7_standard_project\task_key.o"
 "h7_standard_project\task_imu.o"
 "h7_standard_project\task_game.o"
+"h7_standard_project\task_uart.o"
 "h7_standard_project\lv_init.o"
 "h7_standard_project\lv_group.o"
 "h7_standard_project\lv_obj.o"
