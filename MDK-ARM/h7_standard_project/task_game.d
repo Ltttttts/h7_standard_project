@@ -221,7 +221,7 @@ h7_standard_project\task_game.o: ../Middlewares/Third_Party/FreeRTOS/Source/incl
 h7_standard_project\task_game.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 h7_standard_project\task_game.o: ../User/BSP/bsp_jy61p.h
 h7_standard_project\task_game.o: ../User/BSP/bsp_key.h
-h7_standard_project\task_game.o: ../User/Components/key_dev.h
+h7_standard_project\task_game.o: ..\User\App\input_manager.h
 h7_standard_project\task_game.o: ../User/Utils/logger.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 h7_standard_project\task_game.o: ../Core/Inc/stm32h7xx_hal_conf.h
@@ -263,3 +263,4 @@ h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7_standard_project\task_game.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
