@@ -1,70 +1,87 @@
-#include "task_key.h"
-#include "input_manager.h" // 引入标准头文件
+/**
+ * @file    task_key.c
+ * @brief   Key scan task. Maps hardware keys to virtual keys.
+ * @author  Ltttttts
+ */
 
-// 实例化全局邮箱
+#include "task_key.h"
+#include "input_manager.h"
+
+#define KEY_NUM             (4U)
+#define KEY_QUEUE_DEPTH     (10U)
+#define KEY_SCAN_INTERVAL   (10U)
+#define LONG_PRESS_THRESH   (1000U)
+
+/* 硬件按键ID映射 */
+#define HW_KEY_UP           (1U)
+#define HW_KEY_DOWN         (2U)
+#define HW_KEY_ENTER        (3U)
+#define HW_KEY_BACK         (4U)
+
 osMessageQueueId_t input_msg_queue = NULL;
 
-#define KEY_NUM 4
-static Key_t Keys[KEY_NUM];
+static Key_t s_keys[KEY_NUM];
 
-
-/* =======================================================
- * 抽象按键状态查询 (提供给 UI 轮询使用，隔绝硬件细节)
- * ======================================================= */
-bool Input_Is_Key_Held(SysKey_e key_code) 
+bool Input_Is_Key_Held(SysKey_e key_code)
 {
-    // 这里将抽象的虚拟按键，反向映射回物理硬件状态
-    if (key_code == SYS_KEY_UP) {
-        return (Drv_Key_Read(1) == 1); 
+    switch (key_code) {
+    case SYS_KEY_UP:
+        return (Drv_Key_Read(HW_KEY_UP) == 1);
+    case SYS_KEY_DOWN:
+        return (Drv_Key_Read(HW_KEY_DOWN) == 1);
+    case SYS_KEY_ENTER:
+        return (Drv_Key_Read(HW_KEY_ENTER) == 1);
+    case SYS_KEY_BACK:
+        return (Drv_Key_Read(HW_KEY_BACK) == 1);
+    default:
+        return false;
     }
-    if (key_code == SYS_KEY_DOWN) {
-        return (Drv_Key_Read(2) == 1); 
-    }
-    // 【核心修复】：补齐确定键和返回键的状态查询！
-    if (key_code == SYS_KEY_ENTER) {
-        return (Drv_Key_Read(3) == 1); 
-    }
-    if (key_code == SYS_KEY_BACK) {
-        return (Drv_Key_Read(4) == 1); 
-    }
-    
-    // 串口键盘的“长按”由电脑自动连发实现，不需要在这里轮询状态
-    return false; 
 }
 
-
-void Task_Key_Entry(void *argument) 
+void Task_Key_Entry(void *argument)
 {
-    // 创建邮箱，现在叫 input_msg_queue
-    input_msg_queue = osMessageQueueNew(10, sizeof(InputEventMsg_t), NULL);
-    
-    for(int i = 0; i < KEY_NUM; i++) Key_Init(&Keys[i], i + 1, Drv_Key_Read, 1000);
+    (void)argument;
+
+    input_msg_queue = osMessageQueueNew(
+        KEY_QUEUE_DEPTH, sizeof(InputEventMsg_t), NULL);
+
+    for (uint32_t i = 0; i < KEY_NUM; i++) {
+        Key_Init(&s_keys[i], i + 1, Drv_Key_Read,
+                 LONG_PRESS_THRESH);
+    }
 
     while (1) {
-        for(int i = 0; i < KEY_NUM; i++) {
-            Key_Update(&Keys[i], 10); 
-            Key_Event_e event = Key_GetEvent(&Keys[i]);
-            
-            if (event != KEY_EVENT_NONE) {
-                InputEventMsg_t msg = {0};
-                msg.event = event;
-                msg.source = INPUT_SRC_HW_KEY;
-                
-                // 【核心映射】：硬件按键 ID -> 虚拟按键码
-                switch (Keys[i].id) {
-                    case 1: msg.key_code = SYS_KEY_UP; break;
-                    case 2: msg.key_code = SYS_KEY_DOWN; break;
-                    case 3: msg.key_code = SYS_KEY_ENTER; break;
-                    case 4: msg.key_code = SYS_KEY_BACK; break;
-                    default: msg.key_code = SYS_KEY_NONE; break;
-                }
-                
-                if (msg.key_code != SYS_KEY_NONE) {
-                    osMessageQueuePut(input_msg_queue, &msg, 0, 0);
-                }
+        for (uint32_t i = 0; i < KEY_NUM; i++) {
+            Key_Update(&s_keys[i], KEY_SCAN_INTERVAL);
+            Key_Event_e event = Key_GetEvent(&s_keys[i]);
+
+            if (event == KEY_EVENT_NONE) {
+                continue;
+            }
+
+            InputEventMsg_t msg = {0};
+            msg.event = event;
+            msg.source = INPUT_SRC_HW_KEY;
+
+            switch (s_keys[i].id) {
+            case HW_KEY_UP:
+                msg.key_code = SYS_KEY_UP;    break;
+            case HW_KEY_DOWN:
+                msg.key_code = SYS_KEY_DOWN;  break;
+            case HW_KEY_ENTER:
+                msg.key_code = SYS_KEY_ENTER; break;
+            case HW_KEY_BACK:
+                msg.key_code = SYS_KEY_BACK;  break;
+            default:
+                msg.key_code = SYS_KEY_NONE;  break;
+            }
+
+            if (msg.key_code != SYS_KEY_NONE) {
+                osMessageQueuePut(input_msg_queue,
+                                  &msg, 0, 0);
             }
         }
-        osDelay(10); 
+        osDelay(KEY_SCAN_INTERVAL);
     }
 }
 

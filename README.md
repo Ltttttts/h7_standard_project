@@ -1,50 +1,87 @@
 # h7_standard_project
 
-这是一个基于 STM32H7 系列（STM32H723ZGTx）的参考工程，使用 STM32Cube HAL 和 CMSIS-RTOS（FreeRTOS）作为运行时。工程包含常用外设驱动与示例任务：LCD（LVGL）、SD 卡（FATFS）、LED、按键、IMU、串口通信（USART/UART）、SPI、DMA 等。
+基于 STM32H723ZGT6 的嵌入式 GUI 控制台，融合 **LVGL 图形框架**、**FreeRTOS 实时内核**、**面向对象 C 设计**与**安全关键编码规范**。
 
-**主要特性**
-- FreeRTOS（CMSIS-RTOS）任务示例：LED、LVGL、KEY、IMU、UART
-- FATFS：SD 卡读写支持（见 Target / BSP 实现）
-- LVGL：图形界面任务示例（Middlewares/LVGL）
-- BSP：LED、LCD、SD、KEY 等板级驱动（User/BSP）
-- 外设：USART1 / UART4 (115200 8N1)、SPI6、SDMMC1、DMA、GPIO
+## 架构亮点
 
-**硬件与固件依赖**
-- MCU: STM32H723ZGTx（LQFP144）。配置见 [h7_standard_project.ioc](h7_standard_project.ioc)
-- STM32Cube FW: STM32Cube FW_H7 V1.12.1（在 .ioc 中声明）
-- 开发工具（任选其一）：Keil MDK-ARM（工程文件见 `MDK-ARM/`）、或使用 STM32CubeMX/CubeIDE 生成并使用 GCC/ARM 工具链
-- 烧录工具：ST-Link / Keil Flash 等
+### 面向对象 C 设计（OOP in C）
 
-**快速开始（Keil）**
-1. 安装 Keil MDK-ARM 或其它你偏好的 ARM 工具链。
-2. （可选）在 STM32CubeMX 中打开 [h7_standard_project.ioc](h7_standard_project.ioc) 并根据需要重新生成代码（CubeMX v6.14.1 是该项目使用的版本）。
-3. 用 Keil 打开 `MDK-ARM/h7_standard_project.uvprojx` 并 Build。
-4. 使用 Keil 或 ST-Link 将生成的固件下载到板子并运行。
+尽管使用纯 C 语言，项目全程贯彻面向对象设计思想：
 
-**或者（CubeIDE / GCC）**
-- 使用 CubeMX 打开 `.ioc` 并选择目标工具链为 GCC 或 CubeIDE，生成工程后按各自 IDE 的方法构建与下载。工程未随仓库提供完整的 Makefile，因此在非 Keil 环境下可能需要根据生成结果调整构建脚本。
+- **LCD 设备对象** (`LCD_Device_t`)：通过函数指针表（vtable）+ 不透明指针封装硬件差异，`Init` / `Clear` / `DrawBitmap` / `SetBacklight` 等操作全部通过对象方法调用
+- **LED 设备对象** (`LED_Device_t`)：`On` / `Off` / `Toggle` 接口统一，应用层无需关心 GPIO 寄存器
+- **按键抽象层** (`Key_t`)：每个按键是一个独立对象，内置状态机（消抖 / 短按 / 长按），通过 `Key_Init` + `Key_Update` + `Key_GetEvent` 三接口完整封装生命周期
+- **输入管理器** (`InputManager`)：将物理按键和串口命令统一为 `InputEventMsg_t` 消息，上层仅消费 `SYS_KEY_UP/DOWN/ENTER/BACK` 虚拟键码，彻底解耦输入源
 
-**串口与日志**
-- 默认串口波特率：115200，8N1。详见 `Core/Src/usart.c`（USART1/UART4 初始化）。
+### 自动初始化机制（Linux 风格 Initcalls）
 
-**关键文件与位置**
-- CubeMX 配置：[h7_standard_project.ioc](h7_standard_project.ioc)
-- Keil 工程：[MDK-ARM/h7_standard_project.uvprojx](MDK-ARM/h7_standard_project.uvprojx)
-- 主入口：`Core/Src/main.c`
-- 应用任务入口：`User/App/app_main.c`
-- 串口配置：`Core/Src/usart.c`
-- 中间件：`Middlewares/LVGL`, `FATFS/`, `Drivers/STM32H7xx_HAL_Driver`
+参考 Linux 内核的 `initcall` 机制，使用 **链接器段 + 宏注册** 实现模块初始化的自动编排：
 
-**目录结构（概要）**
-- `Core/` — HAL 初始化、时钟、外设初始化及中间件 glue
-- `Drivers/` — CMSIS 与 STM32 HAL 驱动
-- `Middlewares/` — LVGL、第三方库等
-- `FATFS/`、`Target/` — FATFS 与板级支持（BSP）代码
-- `User/` — 应用层代码与任务实现（`User/App/`）
-- `MDK-ARM/` — Keil 工程文件与输出
+```c
+// 在任何 .c 文件中注册，无需手动调用
+AUTO_INIT_EXPORT(BSP_LED_Init, AUTO_INIT_LEVEL_BOARD);
+AUTO_INIT_EXPORT(Logger_Init, AUTO_INIT_LEVEL_PREV);
+AUTO_INIT_EXPORT(prv_create_lvgl_task, AUTO_INIT_LEVEL_APP);
+```
 
-**注意事项**
-- 如果需要变更时钟、外设或中间件配置，请使用 STM32CubeMX 打开并修改 `h7_standard_project.ioc`，然后重新生成代码以保持代码和配置一致。
-- 本仓库中包含 Keil 工程文件，若使用其他工具链请自行迁移或使用 CubeMX 生成对应工程。
+支持 7 个初始化级别（Board → Prev → Device → Component → Env → App → Ready），运行时按优先级升序自动执行。`StartTask_Entry` 仅需一行 `auto_init_run()`。
 
+### 层次化架构与单一职责
 
+```
+应用层（Actor + 业务逻辑）
+    ↓ 仅调用 API
+中间件层（LVGL、FATFS 等）
+    ↓ 调用驱动 API
+驱动层（OOP 设备驱动：LCD、LED、按键、IMU、SD）
+    ↓ 仅调用 BSP 层
+板级层（BSP 封装：bsp_lcd、bsp_led、bsp_sd 等）
+    ↓ 调用 HAL
+芯片层（STM32 HAL 库）
+```
+
+每层只依赖下一层的抽象接口，禁止跨层调用。
+
+### RTOS 任务设计
+
+基于 FreeRTOS + CMSIS-RTOS2，每个功能模块独立为 RTOS 任务，通过**消息队列**通信，无共享状态：
+
+| 任务 | 职责 | 通信方式 |
+|------|------|---------|
+| `LED_Task` | 控制状态 LED（常亮/常灭/闪烁） | 接收 `LedCmdMsg_t` 消息队列 |
+| `Key_Task` | 扫描物理按键，映射为虚拟键码 | 投递 `InputEventMsg_t` 到全局队列 |
+| `LVGL_Task` | LVGL 渲染循环 + UI 事件路由 | 读取输入队列，调用 LVGL API |
+| `IMU_Task` | 串口 JY61P 数据采集与解析 | 串口中断 + DMA 双缓冲 |
+| `UART_Task` | 串口指令接收与转发 | 与 `InputManager` 集成 |
+
+### 编码质量保障
+
+项目内建 **嵌入式 C 编码规范**（`.codebuddy/rules/embedded-c-coding.mdc`），强制遵守：
+
+- **80 行函数 / 4 层嵌套 / 80 列行宽** 严格限制
+- **`static` + `const` 正确性**：非公共符号强制 `static`，只读指针强制 `const`
+- **防御性编程**：断言检查内部契约、运行时校验外部输入、错误码传播至调用链
+- **魔法数字禁用**：所有常量定义为宏
+- **表驱动设计**：按键映射、IMU 数据循环等用表替代 if-else 链
+- **编辑后安全检查清单**：12 阶段审查（编译 → 逻辑 → 内存 → 线程 → 可重入 → 栈 → 资源 → 硬件 → 鲁棒性 → 质量 → SOLID → 影响分析）
+- **标准 `@author` + 头文件保护**：所有文件统一头文件保护宏和 `@author` 标注
+
+## 目录结构
+
+```
+User/
+├── App/           # 应用任务层（app_main / task_led / task_lvgl / task_key 等）
+├── BSP/           # 板级支持包（bsp_lcd / bsp_led / bsp_key / bsp_sd / bsp_jy61p）
+├── Components/    # 组件驱动（lcd_spi_154 / key_dev / led_dev / drv_uart_imu）
+└── Utils/         # 通用工具（logger / auto_init）
+```
+
+## 技术栈
+
+| 组件 | 说明 |
+|------|------|
+| MCU | STM32H723ZGT6 (Cortex-M7, 550MHz) |
+| RTOS | FreeRTOS + CMSIS-RTOS2 |
+| GUI | LVGL 9.x |
+| 文件系统 | FatFS + SDMMC |
+| 开发环境 | MDK-ARM (ARMCC V5) |

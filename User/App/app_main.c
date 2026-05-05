@@ -1,3 +1,9 @@
+/**
+ * @file    app_main.c
+ * @brief   System main entry. Creates all RTOS tasks.
+ * @author  Ltttttts
+ */
+
 #include "cmsis_os.h"
 #include "logger.h"
 
@@ -7,13 +13,17 @@
 #include "bsp_sd.h"
 
 #include "task_led.h"
-#include "task_lcd.h"
 #include "task_lvgl.h"
 #include "task_key.h"
 #include "task_imu.h"
 #include "task_uart.h"
 
+/* ‰ªªÂä°Ê†àÂ§ßÂ∞èÂÆö‰πâ */
+#define TASK_STACK_SMALL     (256U * 4U)
+#define TASK_STACK_MEDIUM    (1024U * 4U)
+#define TASK_STACK_LARGE     (2048U * 4U)
 
+/* ‰ªªÂä°Âè•ÊüÑÂÆö‰πâ */
 osThreadId_t ledTaskHandle;
 osThreadId_t lcdTaskHandle;
 osThreadId_t lvglTaskHandle;
@@ -21,119 +31,79 @@ osThreadId_t keyTaskHandle;
 osThreadId_t imuTaskHandle;
 osThreadId_t uartTaskHandle;
 
-
-
-// Ω´ LED »ŒŒÒµƒ≈‰÷√Ã·»°≥ˆ¿¥£¨∑Ω±„π‹¿Ì
-const osThreadAttr_t ledTask_attributes = {
+static const osThreadAttr_t s_led_task_attr = {
     .name = "LED_Task",
-    .stack_size = 256 * 4,
-    .priority = (osPriority_t) osPriorityNormal, 
+    .stack_size = TASK_STACK_SMALL,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
-
-const osThreadAttr_t dispTask_attr = {
-     .name = "DispTask",
-     .stack_size = 1024 * 4, 
-     .priority = (osPriority_t) osPriorityNormal,
+static const osThreadAttr_t s_lvgl_task_attr = {
+    .name = "LVGL_Task",
+    .stack_size = TASK_STACK_LARGE,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
-
-const osThreadAttr_t lvglTask_attr = {
-        .name = "LVGL_Task",
-        .stack_size = 2048 * 4, 
-        .priority = (osPriority_t) osPriorityNormal,
+static const osThreadAttr_t s_key_task_attr = {
+    .name = "KEY_Task",
+    .stack_size = TASK_STACK_SMALL,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
-const osThreadAttr_t keyTask_attr = {
-        .name = "KEY_Task",
-        .stack_size = 256 * 4, 
-        .priority = (osPriority_t) osPriorityNormal,
+static const osThreadAttr_t s_uart_task_attr = {
+    .name = "UART_Task",
+    .stack_size = TASK_STACK_SMALL,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
-const osThreadAttr_t uartTask_attr = {
-        .name = "UART_Task",
-        .stack_size = 256 * 4, 
-        .priority = (osPriority_t) osPriorityNormal,
+static const osThreadAttr_t s_imu_task_attr = {
+    .name = "IMU_Task",
+    .stack_size = TASK_STACK_SMALL,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 
-const osThreadAttr_t imuTask_attr = {
-        .name = "IMU_Task",
-        .stack_size = 256 * 4, 
-        .priority = (osPriority_t) osPriorityNormal,
-};
+static void prv_create_task(const char *name,
+                            osThreadFunc_t func,
+                            const osThreadAttr_t *attr,
+                            osThreadId_t *handle)
+{
+    *handle = osThreadNew(func, NULL, attr);
+    if (*handle == NULL) {
+        LOG_E("SYS", "Failed to create %s Task!", name);
+    } else {
+        LOG_I("SYS", "%s Task created successfully.", name);
+    }
+}
 
-
-
-
-void StartTask_Entry(void *argument) {
-    // 1. Ω¯»Î¡ŸΩÁ«¯£∫∑¿÷π≥ı ºªØπ˝≥Ã÷–±ª∏¸∏ﬂ”≈œ»º∂µƒ»ŒŒÒ¥Ú∂œ
+void StartTask_Entry(void *argument)
+{
     taskENTER_CRITICAL();
 
-    // 2. ≥ı ºªØ∫À–ƒœµÕ≥◊Èº˛
     Logger_Init();
     LOG_I("SYS", "RTOS Kernel Started.");
 
-    // 3. ≥ı ºªØ”≤º˛«˝∂Ø (BSP)
     BSP_LED_Init();
-	BSP_LCD_Construct();
-	BSP_SD_Init();
-	
+    BSP_LCD_Construct();
+    BSP_SD_Init();
 
-    // 4. ¥¥Ω®“µŒÒ»ŒŒÒ
-    ledTaskHandle = osThreadNew(Task_LED_Entry, NULL, &ledTask_attributes);
-    
-    if (ledTaskHandle == NULL) {
-        LOG_E("SYS", "Failed to create LED Task!");
-    } else {
-        LOG_I("SYS", "LED Task created successfully.");
-    }
-	
-//	lcdTaskHandle = osThreadNew(Task_Display_Entry, NULL, &dispTask_attr);	
-//    if (lcdTaskHandle == NULL) {
-//        LOG_E("SYS", "Failed to create LCD Task!");
-//    } else {
-//        LOG_I("SYS", "LCD Task created successfully.");
-//    }
-	
-	lvglTaskHandle = osThreadNew(Task_LVGL_Entry, NULL, &lvglTask_attr);
-    if (lvglTaskHandle == NULL) {
-        LOG_E("SYS", "Failed to create LVGL Task!");
-    } else {
-        LOG_I("SYS", "LVGL Task created successfully.");
-    }	
-	
-	
-	keyTaskHandle = osThreadNew(Task_Key_Entry, NULL, &keyTask_attr);
-    if (keyTaskHandle == NULL) {
-        LOG_E("SYS", "Failed to create key Task!");
-    } else {
-        LOG_I("SYS", "key Task created successfully.");
-    }	
+    prv_create_task("LED", Task_LED_Entry,
+                    &s_led_task_attr, &ledTaskHandle);
 
-    uartTaskHandle = osThreadNew(Task_UART_Entry, NULL, &uartTask_attr);
-    if (uartTaskHandle == NULL) {
-        LOG_E("SYS", "Failed to create UART Task!");
-    } else {
-        LOG_I("SYS", "UART Task created successfully.");
-    }	
-	
-	
-	imuTaskHandle = osThreadNew(Task_IMU_Entry, NULL, &imuTask_attr);
-    if (imuTaskHandle == NULL) {
-        LOG_E("SYS", "Failed to create imu Task!");
-    } else {
-        LOG_I("SYS", "imu Task created successfully.");
-    }
+    prv_create_task("LVGL", Task_LVGL_Entry,
+                    &s_lvgl_task_attr, &lvglTaskHandle);
 
-	
-    // ’‚¿Ôø…“‘ºÃ–¯¥¥Ω®∆‰À˚»ŒŒÒ£¨»ÁÕ®–≈»ŒŒÒ°¢¥´∏–∆˜»ŒŒÒ...
+    prv_create_task("Key", Task_Key_Entry,
+                    &s_key_task_attr, &keyTaskHandle);
 
-    // 5. ÕÀ≥ˆ¡ŸΩÁ«¯
+    prv_create_task("UART", Task_UART_Entry,
+                    &s_uart_task_attr, &uartTaskHandle);
+
+    prv_create_task("IMU", Task_IMU_Entry,
+                    &s_imu_task_attr, &imuTaskHandle);
+
     taskEXIT_CRITICAL();
 
-    // 6. π¶≥……ÌÕÀ
     LOG_I("SYS", "System initialization complete. StartTask self-deleting.");
-    osThreadExit(); 
+    osThreadExit();
 }
 
 

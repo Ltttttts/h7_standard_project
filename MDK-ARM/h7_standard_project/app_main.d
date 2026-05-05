@@ -64,7 +64,6 @@ h7_standard_project\app_main.o: ../User/Components/lcd_image.h
 h7_standard_project\app_main.o: ../User/BSP/bsp_key.h
 h7_standard_project\app_main.o: ../User/BSP/bsp_sd.h
 h7_standard_project\app_main.o: ..\User\App\task_led.h
-h7_standard_project\app_main.o: ..\User\App\task_lcd.h
 h7_standard_project\app_main.o: ..\User\App\task_lvgl.h
 h7_standard_project\app_main.o: ../Middlewares/LVGL/lvgl.h
 h7_standard_project\app_main.o: ../Middlewares/LVGL/lv_version.h
