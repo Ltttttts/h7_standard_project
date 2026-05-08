@@ -50,10 +50,10 @@ static void method_clear(LCD_Device_t *self)
 
 static void method_show_str(LCD_Device_t *self,
                             uint16_t x, uint16_t y,
-                            const char *str)
+                            char *str)
 {
     osMutexAcquire(self->Lock, osWaitForever);
-    LCD_DisplayString(x, y, (char *)str);
+    LCD_DisplayString(x, y, str);
     osMutexRelease(self->Lock);
 }
 

@@ -1,5 +1,6 @@
 h7_standard_project\task_game.o: ..\User\App\task_game.c
 h7_standard_project\task_game.o: ..\User\App\task_game.h
+h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/lvgl.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/lv_version.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/lv_init.h
@@ -9,7 +10,6 @@ h7_standard_project\task_game.o: ../Middlewares/LVGL/lv_conf.h
 h7_standard_project\task_game.o: ../Middlewares/LVGL/src/misc/lv_types.h
 h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
-h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h
 h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\limits.h
 h7_standard_project\task_game.o: F:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h

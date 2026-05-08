@@ -43,3 +43,5 @@ h7_standard_project\auto_init.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_h
 h7_standard_project\auto_init.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 h7_standard_project\auto_init.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7_standard_project\auto_init.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+h7_standard_project\auto_init.o: ..\User\Utils\auto_init_defs.h
+h7_standard_project\auto_init.o: ..\User\Utils\auto_init_defs.h

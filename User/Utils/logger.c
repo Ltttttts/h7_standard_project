@@ -26,7 +26,6 @@ void Logger_Init(void)
 {
     s_logger_mutex = xSemaphoreCreateMutex();
 }
-
 void Logger_Print(LogLevel_t level, const char *tag,
                   const char *fmt, ...)
 {

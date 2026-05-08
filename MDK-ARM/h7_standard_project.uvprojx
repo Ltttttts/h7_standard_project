@@ -371,7 +371,7 @@
             <TextAddressRange></TextAddressRange>
             <DataAddressRange></DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>custom_h7_standard_project.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -1452,6 +1452,21 @@
               <FileName>logger.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\Utils\logger.h</FilePath>
+            </File>
+            <File>
+              <FileName>auto_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Utils\auto_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>auto_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Utils\auto_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>auto_init_defs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Utils\auto_init_defs.h</FilePath>
             </File>
           </Files>
         </Group>

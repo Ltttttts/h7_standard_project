@@ -54,6 +54,7 @@
 "h7_standard_project\lv_port_indev.o"
 "h7_standard_project\wit_c_sdk.o"
 "h7_standard_project\logger.o"
+"h7_standard_project\auto_init.o"
 "h7_standard_project\led_dev.o"
 "h7_standard_project\lcd_fonts.o"
 "h7_standard_project\lcd_image.o"

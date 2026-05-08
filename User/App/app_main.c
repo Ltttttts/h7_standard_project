@@ -1,11 +1,18 @@
 /**
  * @file    app_main.c
- * @brief   System main entry. Creates all RTOS tasks.
+ * @brief   System main entry. Auto-init runs all registered inits.
  * @author  Ltttttts
+ *
+ * 初始化顺序由 AUTO_INIT_EXPORT 的 level 决定：
+ *   Level 1 (BOARD):   BSP_LED_Init, BSP_SD_Init
+ *   Level 2 (PREV):    Logger_Init
+ *   Level 3 (DEVICE):  BSP_LCD_Construct
+ *   Level 6 (APP):     各 RTOS 任务创建
  */
 
 #include "cmsis_os.h"
 #include "logger.h"
+#include "auto_init.h"
 
 #include "bsp_led.h"
 #include "bsp_lcd.h"
@@ -18,12 +25,11 @@
 #include "task_imu.h"
 #include "task_uart.h"
 
-/* 任务栈大小定义 */
+/* 任务栈大小 */
 #define TASK_STACK_SMALL     (256U * 4U)
-#define TASK_STACK_MEDIUM    (1024U * 4U)
 #define TASK_STACK_LARGE     (2048U * 4U)
 
-/* 任务句柄定义 */
+/* 任务句柄（供其它模块 extern 引用） */
 osThreadId_t ledTaskHandle;
 osThreadId_t lcdTaskHandle;
 osThreadId_t lvglTaskHandle;
@@ -61,50 +67,52 @@ static const osThreadAttr_t s_imu_task_attr = {
     .priority = (osPriority_t)osPriorityNormal,
 };
 
-static void prv_create_task(const char *name,
-                            osThreadFunc_t func,
-                            const osThreadAttr_t *attr,
-                            osThreadId_t *handle)
+/* ========== 任务创建包装函数（Level 6） ========== */
+
+void prv_create_led_task(void)
 {
-    *handle = osThreadNew(func, NULL, attr);
-    if (*handle == NULL) {
-        LOG_E("SYS", "Failed to create %s Task!", name);
-    } else {
-        LOG_I("SYS", "%s Task created successfully.", name);
-    }
+    ledTaskHandle = osThreadNew(Task_LED_Entry, NULL,
+                                &s_led_task_attr);
 }
+
+void prv_create_lvgl_task(void)
+{
+    lvglTaskHandle = osThreadNew(
+        Task_LVGL_Entry, NULL, &s_lvgl_task_attr);
+}
+
+void prv_create_key_task(void)
+{
+    keyTaskHandle = osThreadNew(Task_Key_Entry, NULL,
+                                &s_key_task_attr);
+}
+
+void prv_create_uart_task(void)
+{
+    uartTaskHandle = osThreadNew(
+        Task_UART_Entry, NULL, &s_uart_task_attr);
+}
+
+void prv_create_imu_task(void)
+{
+    imuTaskHandle = osThreadNew(Task_IMU_Entry, NULL,
+                                &s_imu_task_attr);
+}
+
+/* ========== 系统入口 ========== */
 
 void StartTask_Entry(void *argument)
 {
+    (void)argument;
+
     taskENTER_CRITICAL();
 
-    Logger_Init();
     LOG_I("SYS", "RTOS Kernel Started.");
-
-    BSP_LED_Init();
-    BSP_LCD_Construct();
-    BSP_SD_Init();
-
-    prv_create_task("LED", Task_LED_Entry,
-                    &s_led_task_attr, &ledTaskHandle);
-
-    prv_create_task("LVGL", Task_LVGL_Entry,
-                    &s_lvgl_task_attr, &lvglTaskHandle);
-
-    prv_create_task("Key", Task_Key_Entry,
-                    &s_key_task_attr, &keyTaskHandle);
-
-    prv_create_task("UART", Task_UART_Entry,
-                    &s_uart_task_attr, &uartTaskHandle);
-
-    prv_create_task("IMU", Task_IMU_Entry,
-                    &s_imu_task_attr, &imuTaskHandle);
+    auto_init_run();
 
     taskEXIT_CRITICAL();
 
-    LOG_I("SYS", "System initialization complete. StartTask self-deleting.");
+    LOG_I("SYS",
+          "System initialization complete. StartTask self-deleting.");
     osThreadExit();
 }
-
-
-

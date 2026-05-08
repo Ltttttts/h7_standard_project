@@ -55,9 +55,8 @@ osMutexId_t lvgl_mutex = NULL;
 static uint8_t draw_buf[DISP_HOR_RES * DISP_VER_RES / 10 * 2]
     __attribute__((aligned(32)));
 
-extern JY61P_t MyIMU;
 extern FATFS SDFatFs;
-extern osThreadId_t game_task_handle;
+extern JY61P_t MyIMU;
 
 static AppContext_t App;
 
@@ -362,9 +361,13 @@ static void prv_handle_back_key(void)
     if (App.router.current_page == PAGE_FILE_READER) {
         prv_page_navigate(PAGE_SD_EXPLORER);
     } else if (App.router.current_page == PAGE_GAME_RUNNING &&
-               game_task_handle != NULL) {
+               Game_IsRunning()) {
         Game_Stop();
-        osDelay(50);
+        /* 等游戏任务完全退出后再导航 */
+        for (int i = 0; i < 100; i++) {
+            if (!Game_IsRunning()) break;
+            osDelay(5);
+        }
         prv_page_navigate(PAGE_MAIN_MENU);
     } else if (App.router.current_page != PAGE_MAIN_MENU) {
         prv_page_navigate(PAGE_MAIN_MENU);
@@ -885,18 +888,12 @@ static void UI_MainMenu_Create(void)
         NULL, NULL);
 }
 
-/* ========== 主任务入口 ========== */
-void Task_LVGL_Entry(void *argument)
+/* ========== LVGL 硬件初始化（Level 3+4，自动执行） ========== */
+
+void prv_lvgl_hardware_init(void)
 {
-    (void)argument;
-
-    memset(&App, 0, sizeof(AppContext_t));
-    App.led.mode = 2;
-    App.led.interval = 500;
-
     Screen.Init(&Screen);
     Screen.Clear(&Screen);
-    Screen.SetBacklight(&Screen, 1);
 
     lv_init();
     lv_display_t *disp = lv_display_create(
@@ -919,10 +916,21 @@ void Task_LVGL_Entry(void *argument)
     lv_indev_set_group(App.input.indev,
                        App.input.group);
 
+    lvgl_mutex = osMutexNew(NULL);
+}
+
+/* ========== 主任务入口 ========== */
+void Task_LVGL_Entry(void *argument)
+{
+    (void)argument;
+
+    App.led.mode = 2;
+    App.led.interval = 500;
+
+    Screen.SetBacklight(&Screen, 1);
+
     UI_MainMenu_Create();
     prv_page_navigate(PAGE_MAIN_MENU);
-
-    lvgl_mutex = osMutexNew(NULL);
 
     while (1) {
         osMutexAcquire(lvgl_mutex, osWaitForever);

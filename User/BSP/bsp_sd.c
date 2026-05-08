@@ -9,12 +9,15 @@
 #include "logger.h"
 #include "ff.h"
 
-
-// 引用 CubeMX 生成的 SDMMC 句柄 (通常在 sdmmc.c 中定义)
 extern SD_HandleTypeDef hsd1;
 
-
 FATFS SDFatFs;
+
+/* 包装 BSP_SD_Init（返回 uint8_t→void）供 auto_init 调用 */
+void prv_bsp_sd_init(void)
+{
+    (void)BSP_SD_Init();
+}
 
 /**
  * @brief  初始化 SD 卡硬件

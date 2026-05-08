@@ -53,6 +53,7 @@ h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ha
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7_standard_project\app_main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+h7_standard_project\app_main.o: ../User/Utils/auto_init.h
 h7_standard_project\app_main.o: ../User/BSP/bsp_led.h
 h7_standard_project\app_main.o: ../User/Components/led_dev.h
 h7_standard_project\app_main.o: ../User/BSP/bsp_lcd.h
@@ -279,4 +280,5 @@ h7_standard_project\app_main.o: ../FATFS/Target/fatfs_platform.h
 h7_standard_project\app_main.o: ..\User\App\task_key.h
 h7_standard_project\app_main.o: ../User/Components/key_dev.h
 h7_standard_project\app_main.o: ..\User\App\task_imu.h
+h7_standard_project\app_main.o: ../User/BSP/bsp_jy61p.h
 h7_standard_project\app_main.o: ..\User\App\task_uart.h

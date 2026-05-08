@@ -1937,7 +1937,7 @@ I (F:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (..\Middlewares\wit_c_sdk\REG.h)(0x69E85E3D)
 F (..\Middlewares\wit_c_sdk\wit_c_sdk.h)(0x69E85E3D)()
-F (..\User\Utils\logger.c)(0x69F998BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\logger.o --omf_browse h7_standard_project\logger.crf --depend h7_standard_project\logger.d)
+F (..\User\Utils\logger.c)(0x69FC25B2)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\logger.o --omf_browse h7_standard_project\logger.crf --depend h7_standard_project\logger.d)
 I (..\User\Utils\logger.h)(0x69E85E3D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x69E85E3A)
@@ -1995,6 +1995,53 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x686750F3)
 F (..\User\Utils\logger.h)(0x69E85E3D)()
+F (..\User\Utils\auto_init.c)(0x69FC2978)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\auto_init.o --omf_browse h7_standard_project\auto_init.crf --depend h7_standard_project\auto_init.d)
+I (..\User\Utils\auto_init.h)(0x69FC295E)
+I (F:\Keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
+I (..\User\Utils\logger.h)(0x69E85E3D)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
+I (../Core/Inc/stm32h7xx_hal_conf.h)(0x69E85E3A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h)(0x6867511A)
+I (../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h)(0x6867511A)
+I (../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h)(0x6867511A)
+I (../Drivers/CMSIS/Include/core_cm7.h)(0x686750F6)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x686750F6)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x686750F6)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x686750F6)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x686750F6)
+I (../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x6867511A)
+I (F:\Keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
+I (F:\Keil5\ARM\ARMCC\include\math.h)(0x588B8344)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
+I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
+I (..\User\Utils\auto_init_defs.h)(0x69FD7F83)
+F (..\User\Utils\auto_init.h)(0x69FC295E)()
+F (..\User\Utils\auto_init_defs.h)(0x69FD7F83)()
 F (..\User\Components\led_dev.c)(0x69E85E3D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\led_dev.o --omf_browse h7_standard_project\led_dev.crf --depend h7_standard_project\led_dev.d)
 I (..\User\Components\led_dev.h)(0x69E85E3D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
@@ -2198,7 +2245,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
 I (../User/Utils/logger.h)(0x69E85E3D)
 F (..\User\Components\drv_uart_imu.h)(0x69E85E3D)()
-F (..\User\BSP\bsp_led.c)(0x69F998BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_led.o --omf_browse h7_standard_project\bsp_led.crf --depend h7_standard_project\bsp_led.d)
+F (..\User\BSP\bsp_led.c)(0x69FC25A0)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_led.o --omf_browse h7_standard_project\bsp_led.crf --depend h7_standard_project\bsp_led.d)
 I (..\User\BSP\bsp_led.h)(0x69E85E3D)
 I (../User/Components/led_dev.h)(0x69E85E3D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
@@ -2244,7 +2291,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
 I (../User/Utils/logger.h)(0x69E85E3D)
 F (..\User\BSP\bsp_led.h)(0x69E85E3D)()
-F (..\User\BSP\bsp_lcd.c)(0x69F998BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_lcd.o --omf_browse h7_standard_project\bsp_lcd.crf --depend h7_standard_project\bsp_lcd.d)
+F (..\User\BSP\bsp_lcd.c)(0x69FC25A7)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_lcd.o --omf_browse h7_standard_project\bsp_lcd.crf --depend h7_standard_project\bsp_lcd.d)
 I (..\User\BSP\bsp_lcd.h)(0x69E85E3D)
 I (../User/Components/lcd_spi_154.h)(0x69E85E3D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
@@ -2319,7 +2366,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x686750F3)
 F (..\User\BSP\bsp_jy61p.h)(0x69E85E3D)()
-F (..\User\BSP\bsp_sd.c)(0x69F998BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_sd.o --omf_browse h7_standard_project\bsp_sd.crf --depend h7_standard_project\bsp_sd.d)
+F (..\User\BSP\bsp_sd.c)(0x69FC264F)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\bsp_sd.o --omf_browse h7_standard_project\bsp_sd.crf --depend h7_standard_project\bsp_sd.d)
 I (..\User\BSP\bsp_sd.h)(0x69E85E3D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6867511A)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x69E85E3A)
@@ -2381,7 +2428,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x686750F3)
 F (..\User\BSP\bsp_sd.h)(0x69E85E3D)()
-F (..\User\App\app_main.c)(0x69F998BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\app_main.o --omf_browse h7_standard_project\app_main.crf --depend h7_standard_project\app_main.d)
+F (..\User\App\app_main.c)(0x69FC263F)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\app_main.o --omf_browse h7_standard_project\app_main.crf --depend h7_standard_project\app_main.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h)(0x686750F3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x686750F3)
 I (F:\Keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
@@ -2435,6 +2482,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
+I (../User/Utils/auto_init.h)(0x69FC295E)
 I (../User/BSP/bsp_led.h)(0x69E85E3D)
 I (../User/Components/led_dev.h)(0x69E85E3D)
 I (../User/BSP/bsp_lcd.h)(0x69E85E3D)
@@ -2658,7 +2706,8 @@ I (../FATFS/Target/bsp_driver_sd.h)(0x69E85E3A)
 I (../FATFS/Target/fatfs_platform.h)(0x69E85E3A)
 I (..\User\App\task_key.h)(0x69F97C50)
 I (../User/Components/key_dev.h)(0x69E85E3D)
-I (..\User\App\task_imu.h)(0x69E85E3D)
+I (..\User\App\task_imu.h)(0x69FD7F18)
+I (../User/BSP/bsp_jy61p.h)(0x69E85E3D)
 I (..\User\App\task_uart.h)(0x69E86912)
 F (..\User\App\app_main.h)(0x69F97C4C)()
 F (..\User\App\task_led.c)(0x69F97C51)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_led.o --omf_browse h7_standard_project\task_led.crf --depend h7_standard_project\task_led.d)
@@ -2760,7 +2809,7 @@ I (../User/Components/lcd_image.h)(0x69E85E3D)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x686750F3)
 I (../User/Utils/logger.h)(0x69E85E3D)
 F (..\User\App\task_lcd.h)(0x69E85E3D)()
-F (..\User\App\task_lvgl.c)(0x69F97C4E)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_lvgl.o --omf_browse h7_standard_project\task_lvgl.crf --depend h7_standard_project\task_lvgl.d)
+F (..\User\App\task_lvgl.c)(0x69FD89BC)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_lvgl.o --omf_browse h7_standard_project\task_lvgl.crf --depend h7_standard_project\task_lvgl.d)
 I (F:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (..\User\App\task_lvgl.h)(0x69F2F108)
@@ -3039,7 +3088,7 @@ I (../User/BSP/bsp_jy61p.h)(0x69E85E3D)
 I (../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h)(0x686750F3)
 I (../Middlewares/Third_Party/FatFs/src/diskio.h)(0x686750F3)
 I (../FATFS/Target/sd_diskio.h)(0x69E85E3A)
-I (..\User\App\task_game.h)(0x69E85E3D)
+I (..\User\App\task_game.h)(0x69FD7F78)
 I (..\User\App\input_manager.h)(0x69F97C53)
 F (..\User\App\task_lvgl.h)(0x69F2F108)()
 F (..\User\App\task_key.c)(0x69F97C4F)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_key.o --omf_browse h7_standard_project\task_key.crf --depend h7_standard_project\task_key.d)
@@ -3052,7 +3101,7 @@ I (../User/Components/key_dev.h)(0x69E85E3D)
 I (..\User\App\input_manager.h)(0x69F97C53)
 I (F:\Keil5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 F (..\User\App\task_key.h)(0x69F97C50)()
-F (..\User\App\task_imu.c)(0x69E85E3D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_imu.o --omf_browse h7_standard_project\task_imu.crf --depend h7_standard_project\task_imu.d)
+F (..\User\App\task_imu.c)(0x69FD7F16)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_imu.o --omf_browse h7_standard_project\task_imu.crf --depend h7_standard_project\task_imu.d)
 I (../User/BSP/bsp_jy61p.h)(0x69E85E3D)
 I (F:\Keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
 I (../User/Components/drv_uart_imu.h)(0x69E85E3D)
@@ -3098,9 +3147,10 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x686750F3)
-F (..\User\App\task_imu.h)(0x69E85E3D)()
-F (..\User\App\task_game.c)(0x69F2FC2E)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_game.o --omf_browse h7_standard_project\task_game.crf --depend h7_standard_project\task_game.d)
-I (..\User\App\task_game.h)(0x69E85E3D)
+F (..\User\App\task_imu.h)(0x69FD7F18)()
+F (..\User\App\task_game.c)(0x69FD8C08)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_game.o --omf_browse h7_standard_project\task_game.crf --depend h7_standard_project\task_game.d)
+I (..\User\App\task_game.h)(0x69FD7F78)
+I (F:\Keil5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 I (../Middlewares/LVGL/lvgl.h)(0x69E85E3C)
 I (../Middlewares/LVGL/lv_version.h)(0x69E85E3C)
 I (../Middlewares/LVGL/src/lv_init.h)(0x69E85E3D)
@@ -3110,7 +3160,6 @@ I (../Middlewares/LVGL/lv_conf.h)(0x69E85E3C)
 I (../Middlewares/LVGL/src/misc/lv_types.h)(0x69E85E3D)
 I (F:\Keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
-I (F:\Keil5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\inttypes.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\limits.h)(0x588B8344)
 I (F:\Keil5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
@@ -3362,9 +3411,9 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6867511A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6867511A)
 I (F:\Keil5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
-F (..\User\App\task_game.h)(0x69E85E3D)()
+F (..\User\App\task_game.h)(0x69FD7F78)()
 F (..\User\App\input_manager.h)(0x69F97C53)()
-F (..\User\App\task_uart.c)(0x69E87BE6)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_uart.o --omf_browse h7_standard_project\task_uart.crf --depend h7_standard_project\task_uart.d)
+F (..\User\App\task_uart.c)(0x69FD7F23)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../User/Utils -I ../User/Components -I ../User/BSP -I ../User/App -I ../Middlewares/LVGL -I ../Middlewares/LVGL/src -I ../Middlewares/LVGL/demos -I ../Middlewares/wit_c_sdk -I ../FATFS/Target -I ../FATFS/App -I ../Middlewares/Third_Party/FatFs/src-I.\RTE\_h7_standard_project-IF:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IF:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="542" -DSTM32H723xx -D_RTE_ -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -DLV_CONF_INCLUDE_SIMPLE-o h7_standard_project\task_uart.o --omf_browse h7_standard_project\task_uart.crf --depend h7_standard_project\task_uart.d)
 I (..\User\App\task_uart.h)(0x69E86912)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x686750F3)
 I (F:\Keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
