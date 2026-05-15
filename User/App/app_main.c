@@ -1,9 +1,9 @@
 /**
  * @file    app_main.c
- * @brief   System main entry. Auto-init runs all registered inits.
+ * @brief   系统应用入口，负责执行自动初始化表。
  * @author  Ltttttts
  *
- * 初始化顺序由 AUTO_INIT_EXPORT 的 level 决定：
+ * 初始化顺序由 auto_init_defs.h 中的 level 决定：
  *   Level 1 (BOARD):   BSP_LED_Init, BSP_SD_Init
  *   Level 2 (PREV):    Logger_Init
  *   Level 3 (DEVICE):  BSP_LCD_Construct
@@ -29,8 +29,9 @@
 #define TASK_STACK_SMALL     (256U * 4U)
 #define TASK_STACK_LARGE     (2048U * 4U)
 
-/* 任务句柄（供其它模块 extern 引用） */
+/* 任务句柄，供其他模块按需 extern 引用。 */
 osThreadId_t ledTaskHandle;
+osThreadId_t flowLedTaskHandle;
 osThreadId_t lcdTaskHandle;
 osThreadId_t lvglTaskHandle;
 osThreadId_t keyTaskHandle;
@@ -39,6 +40,12 @@ osThreadId_t uartTaskHandle;
 
 static const osThreadAttr_t s_led_task_attr = {
     .name = "LED_Task",
+    .stack_size = TASK_STACK_SMALL,
+    .priority = (osPriority_t)osPriorityNormal,
+};
+
+static const osThreadAttr_t s_flow_led_task_attr = {
+    .name = "FlowLED_Task",
     .stack_size = TASK_STACK_SMALL,
     .priority = (osPriority_t)osPriorityNormal,
 };
@@ -67,12 +74,14 @@ static const osThreadAttr_t s_imu_task_attr = {
     .priority = (osPriority_t)osPriorityNormal,
 };
 
-/* ========== 任务创建包装函数（Level 6） ========== */
+/* ========== 任务创建包装函数，属于自动初始化 Level 6 ========== */
 
 void prv_create_led_task(void)
 {
     ledTaskHandle = osThreadNew(Task_LED_Entry, NULL,
                                 &s_led_task_attr);
+    flowLedTaskHandle = osThreadNew(Task_FlowLED_Entry, NULL,
+                                    &s_flow_led_task_attr);
 }
 
 void prv_create_lvgl_task(void)
